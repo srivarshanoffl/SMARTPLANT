@@ -1,0 +1,18 @@
+# SmartPlant AI - Dependencies
+# Tested on Python 3.14 on Windows AMD64
+
+# Core numerical and data processing
+numpy>=2.0.0
+pandas>=2.2.0
+scipy>=1.14.0
+
+# Machine learning & model loading
+scikit-learn>=1.5.0
+joblib>=1.4.0
+xgboost>=2.0.0
+lightgbm>=4.0.0
+
+# Visualization & Notebook execution
+matplotlib>=3.8.0
+nbformat>=5.9.0
+ipykernel>=6.29.0

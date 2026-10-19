@@ -1,0 +1,91 @@
+{
+    "metadata": {
+        "evaluation_timestamp": "2026-10-19 19:14:03",
+        "dataset_path": "C:\\Users\\sriva\\Downloads\\inovez\\SmartPlantAI_Project\\data\\train.csv",
+        "total_dataset_rows": 28031,
+        "calibration_split_rows": 22424,
+        "backtest_split_rows": 5607,
+        "prediction_model": "energy_model_breakthrough.joblib",
+        "calibration_method": "Median and Median Absolute Deviation (MAD) + Empirical Quantiles"
+    },
+    "metrics": {
+        "total_intervals_analyzed": 5607,
+        "total_intervals_flagged": 656,
+        "percentage_intervals_flagged": 11.7,
+        "unique_alerts_generated": 444,
+        "suppressed_duplicates_count": 212,
+        "deduplication_rate_pct": 32.32,
+        "alerts_by_severity": {
+            "Low": 210,
+            "Medium": 147,
+            "High": 66,
+            "Critical": 233
+        },
+        "alerts_by_type": {
+            "forecast_deviation": 630,
+            "consumption_spike": 19,
+            "consumption_drop": 7
+        },
+        "prediction_error_distribution": {
+            "mean_signed_error": -0.013254551406260076,
+            "std_signed_error": 8.060585843407944,
+            "median_signed_error": -0.029599929167940964,
+            "mad_signed_error": 0.49260900075532454,
+            "mean_absolute_error": 3.677421463977912,
+            "rmse": 8.060596741065858,
+            "p50_abs_error": 0.4948661892632291,
+            "p90_abs_error": 11.512321171146924,
+            "p95_abs_error": 17.845914765035555,
+            "p99_abs_error": 35.04621533497136,
+            "max_abs_error": 67.7076428318142
+        },
+        "execution_time_seconds": 0.06,
+        "throughput_ms_per_interval": 0.011
+    },
+    "calibration_parameters": {
+        "n_samples": 22424,
+        "global_residual_median": 0.0,
+        "global_residual_mad": 0.5,
+        "global_error_quantiles": {
+            "p90": 23.327000000000005,
+            "p95": 35.24399999999994,
+            "p99": 61.32390000000004,
+            "p998": 86.50853999999931
+        },
+        "global_usage_bounds": {
+            "low": 2.59,
+            "high": 131.63734999999983,
+            "median": 4.75
+        },
+        "load_type_bounds": {
+            "Light_Load": {
+                "count": 11484,
+                "usage_p05": 2.59,
+                "usage_p99": 105.95250000000001,
+                "residual_median": 0.0,
+                "residual_mad": 0.5,
+                "err_p95": 16.489999999999995,
+                "err_p99": 45.08080000000002
+            },
+            "Maximum_Load": {
+                "count": 4692,
+                "usage_p05": 4.07,
+                "usage_p99": 132.25250000000003,
+                "residual_median": -0.17999999999999972,
+                "residual_mad": 8.21,
+                "err_p95": 46.91,
+                "err_p99": 80.2527
+            },
+            "Medium_Load": {
+                "count": 6248,
+                "usage_p05": 2.81,
+                "usage_p99": 129.2771,
+                "residual_median": -0.06999999999999984,
+                "residual_mad": 2.7199999999999953,
+                "err_p95": 40.17,
+                "err_p99": 64.83709999999999
+            }
+        }
+    },
+    "operational_disclaimer": "NOTICE: Ground-truth equipment failure logs and verified electrical maintenance work-orders are not included in the dataset. Therefore, formal Precision, Recall, and F1 incident scores cannot be fabricated. The reported alerts reflect statistically calibrated energy consumption and forecast deviations designed for investigative operator review."
+}

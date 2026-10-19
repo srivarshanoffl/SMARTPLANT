@@ -1,0 +1,99 @@
+{
+    "model_name": "Breakthrough_Enhanced_Delta_Ensemble_37feat",
+    "artifact_file": "smartplant_output/energy_model_breakthrough.joblib",
+    "artifact_size_kb": 2341.0,
+    "model_architecture": "Ensemble of 55% XGBoostRegressor + 45% LightGBMRegressor predicting 15-minute consumption delta (Delta = y_{t+1} - y_t)",
+    "source_dataset": "data/train.csv (Industrial Steel Plant Energy Consumption)",
+    "total_observations": 28031,
+    "chronological_split": {
+        "train_fraction_pct": 80.0,
+        "train_samples": 22424,
+        "train_period": "2018-01-01 00:15:00 to 2018-08-22 23:45:00",
+        "test_fraction_pct": 20.0,
+        "test_samples": 5607,
+        "test_period": "2018-08-23 00:00:00 to 2018-12-31 23:45:00",
+        "sampling_interval_minutes": 15
+    },
+    "verified_metrics": {
+        "test_rmse_kwh": 8.0608,
+        "test_mae_kwh": 3.6754,
+        "sequential_pipeline_test_rmse_kwh": 8.0606,
+        "sequential_pipeline_test_mae_kwh": 3.6774,
+        "validation_rmse_kwh": 9.21,
+        "validation_mae_kwh": 4.333,
+        "target_threshold_rmse_kwh": 7.5,
+        "remaining_rmse_gap_kwh": 0.5606
+    },
+    "benchmark_comparisons": {
+        "naive_persistence_test_rmse_kwh": 11.9448,
+        "naive_persistence_test_mae_kwh": 5.2769,
+        "original_random_forest_baseline_rmse_kwh": 9.0558,
+        "original_random_forest_baseline_mae_kwh": 4.1486,
+        "previous_champion_direct_ensemble_rmse_kwh": 8.2474,
+        "previous_champion_direct_ensemble_mae_kwh": 3.7943,
+        "rmse_improvement_over_naive_pct": 32.52,
+        "rmse_improvement_over_rf_baseline_pct": 10.99,
+        "rmse_improvement_over_previous_champion_pct": 2.26
+    },
+    "inference_latency_benchmarks": {
+        "cold_start_latency_ms": 39.61,
+        "warm_average_latency_ms": 9.15,
+        "warm_latency_range_ms": "8.50 - 10.24 ms",
+        "hardware_platform": "Windows AMD64, Python 3.14"
+    },
+    "feature_space_specification": {
+        "feature_count_total": 37,
+        "raw_electrical_telemetry": [
+            "Usage_kWh",
+            "Lagging_Current_Reactive.Power_kVarh",
+            "Leading_Current_Reactive_Power_kVarh",
+            "CO2(tCO2)",
+            "Lagging_Current_Power_Factor",
+            "Leading_Current_Power_Factor"
+        ],
+        "calendar_and_shift_features": [
+            "NSM",
+            "Load_Type",
+            "WeekStatus",
+            "Day_of_week"
+        ],
+        "engineered_lag_and_window_features": [
+            "lag_1",
+            "lag_2",
+            "lag_3",
+            "lag_4",
+            "lag_8",
+            "lag_12",
+            "lag_16",
+            "lag_24",
+            "lag_32",
+            "lag_48",
+            "lag_96",
+            "rolling_mean_4",
+            "rolling_std_4",
+            "rolling_max_4",
+            "rolling_min_4",
+            "rolling_mean_12",
+            "rolling_mean_96",
+            "rolling_mean_192",
+            "reactive_power_ratio",
+            "active_to_reactive_ratio",
+            "apparent_power_kVA",
+            "power_factor_harmonic_mean",
+            "co2_intensity_ratio",
+            "usage_accel_15m",
+            "usage_jerk_15m"
+        ]
+    },
+    "error_distribution_characteristics": {
+        "large_jump_intervals_gt_20kwh": 505,
+        "large_jump_fraction_of_test_pct": 9.01,
+        "share_of_total_squared_error_pct": 66.68,
+        "median_absolute_error_kwh": 0.4949,
+        "p90_absolute_error_kwh": 11.5123,
+        "p95_absolute_error_kwh": 17.8459,
+        "p99_absolute_error_kwh": 35.0462,
+        "max_absolute_error_kwh": 67.7076
+    },
+    "verification_notes": "All figures independently validated against saved production artifact smartplant_output/energy_model_breakthrough.joblib and sequential test evaluation."
+}

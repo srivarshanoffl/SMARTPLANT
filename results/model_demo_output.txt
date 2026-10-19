@@ -1,0 +1,144 @@
+========================================================================================
+SMARTPLANT AI - INDUSTRIAL ENERGY FORECASTING & ANOMALY ALERT DEMO
+========================================================================================
+Timestamp           : 2026-10-19 21:26:09 UTC
+Environment         : Python 3.14.6 on Windows AMD64
+Working Directory   : C:\Users\sriva\Downloads\inovez\SmartPlantAI_Project\DATA_DIVERGENCE_SUBMISSION
+
+----------------------------------------------------------------------------------------
+STAGE 1: PRODUCTION MODEL INITIALIZATION
+----------------------------------------------------------------------------------------
+Model Tag           : 'breakthrough'
+Model Architecture  : 55% XGBoost + 45% LightGBM (Delta Formulation: Delta = y_{t+1} - y_t)
+Feature Space       : 44 numeric + 3 categorical features
+Artifact Size       : 2341.0 KB
+Artifact Load Time  : 440.71 ms
+Verified Test RMSE  : 8.0608 kWh
+Verified Test MAE   : 3.6754 kWh
+
+----------------------------------------------------------------------------------------
+STAGE 2: LOAD HISTORICAL TELEMETRY
+----------------------------------------------------------------------------------------
+Total Dataset Rows  : 28,031
+Train/Test Split    : 22,424 train (80%) / 5,607 test (20%)
+Demo Window         : Rows 22488 to 22497 (10 intervals, 2.5 hours)
+Initial History     : Pre-seeded with 192 genuine past intervals
+Date Range          : 23/08/2018 06:15 to 23/08/2018 08:45
+
+----------------------------------------------------------------------------------------
+STAGE 3: CHRONOLOGICAL INTERVAL DEMONSTRATION
+Strict causality: Forecast generated at time t -> Actual observed at time t+1
+----------------------------------------------------------------------------------------
+
+[INTERVAL 1/10] Current Time: 23/08/2018 06:15 (NSM: 22500) -> Target: 23/08/2018 06:30 (NSM: 23400)
+  Current State (t)           :   3.17 kWh | Load: Light_Load | PF: 46.8%
+  >> PREDICTION at time t     :   3.31 kWh for 23/08/2018 06:30 (NSM: 23400) [Predicted Delta: +0.14 kWh, Mode: full_history] (Latency: 27.99 ms)
+  >> ACTUAL OBSERVED at (t+1) :   3.17 kWh (Load: Light_Load | PF: 46.8%)
+  >> FORECAST ERROR (Act-Pred):  -0.14 kWh | |Error|:  0.14 kWh (-4.2%)
+  >> ANOMALY STATUS          : Normal consumption within statistical MAD threshold (Z-MAD: -0.19)
+
+[INTERVAL 2/10] Current Time: 23/08/2018 06:30 (NSM: 23400) -> Target: 23/08/2018 06:45 (NSM: 24300)
+  Current State (t)           :   3.17 kWh | Load: Light_Load | PF: 46.8%
+  >> PREDICTION at time t     :   3.25 kWh for 23/08/2018 06:45 (NSM: 24300) [Predicted Delta: +0.08 kWh, Mode: full_history] (Latency: 9.44 ms)
+  >> ACTUAL OBSERVED at (t+1) :   3.13 kWh (Load: Light_Load | PF: 47.3%)
+  >> FORECAST ERROR (Act-Pred):  -0.12 kWh | |Error|:  0.12 kWh (-3.7%)
+  >> ANOMALY STATUS          : Normal consumption within statistical MAD threshold (Z-MAD: -0.16)
+
+[INTERVAL 3/10] Current Time: 23/08/2018 06:45 (NSM: 24300) -> Target: 23/08/2018 07:00 (NSM: 25200)
+  Current State (t)           :   3.13 kWh | Load: Light_Load | PF: 47.3%
+  >> PREDICTION at time t     :   3.16 kWh for 23/08/2018 07:00 (NSM: 25200) [Predicted Delta: +0.03 kWh, Mode: full_history] (Latency: 10.03 ms)
+  >> ACTUAL OBSERVED at (t+1) :   3.06 kWh (Load: Light_Load | PF: 47.6%)
+  >> FORECAST ERROR (Act-Pred):  -0.10 kWh | |Error|:  0.10 kWh (-3.1%)
+  >> ANOMALY STATUS          : Normal consumption within statistical MAD threshold (Z-MAD: -0.13)
+
+[INTERVAL 4/10] Current Time: 23/08/2018 07:00 (NSM: 25200) -> Target: 23/08/2018 07:15 (NSM: 26100)
+  Current State (t)           :   3.06 kWh | Load: Light_Load | PF: 47.6%
+  >> PREDICTION at time t     :   3.08 kWh for 23/08/2018 07:15 (NSM: 26100) [Predicted Delta: +0.02 kWh, Mode: full_history] (Latency: 10.29 ms)
+  >> ACTUAL OBSERVED at (t+1) :   3.06 kWh (Load: Light_Load | PF: 46.9%)
+  >> FORECAST ERROR (Act-Pred):  -0.02 kWh | |Error|:  0.02 kWh (-0.8%)
+  >> ANOMALY STATUS          : Normal consumption within statistical MAD threshold (Z-MAD: -0.03)
+
+[INTERVAL 5/10] Current Time: 23/08/2018 07:15 (NSM: 26100) -> Target: 23/08/2018 07:30 (NSM: 27000)
+  Current State (t)           :   3.06 kWh | Load: Light_Load | PF: 46.9%
+  >> PREDICTION at time t     :   3.08 kWh for 23/08/2018 07:30 (NSM: 27000) [Predicted Delta: +0.02 kWh, Mode: full_history] (Latency: 10.23 ms)
+  >> ACTUAL OBSERVED at (t+1) :   3.24 kWh (Load: Light_Load | PF: 50.5%)
+  >> FORECAST ERROR (Act-Pred):  +0.16 kWh | |Error|:  0.16 kWh (+5.1%)
+  >> ANOMALY STATUS          : Normal consumption within statistical MAD threshold (Z-MAD: +0.21)
+
+[INTERVAL 6/10] Current Time: 23/08/2018 07:30 (NSM: 27000) -> Target: 23/08/2018 07:45 (NSM: 27900)
+  Current State (t)           :   3.24 kWh | Load: Light_Load | PF: 50.5%
+  >> PREDICTION at time t     :   3.75 kWh for 23/08/2018 07:45 (NSM: 27900) [Predicted Delta: +0.51 kWh, Mode: full_history] (Latency: 9.49 ms)
+  >> ACTUAL OBSERVED at (t+1) :   3.78 kWh (Load: Light_Load | PF: 51.5%)
+  >> FORECAST ERROR (Act-Pred):  +0.03 kWh | |Error|:  0.03 kWh (+0.7%)
+  >> ANOMALY STATUS          : Normal consumption within statistical MAD threshold (Z-MAD: +0.04)
+
+[INTERVAL 7/10] Current Time: 23/08/2018 07:45 (NSM: 27900) -> Target: 23/08/2018 08:00 (NSM: 28800)
+  Current State (t)           :   3.78 kWh | Load: Light_Load | PF: 51.5%
+  >> PREDICTION at time t     :   4.86 kWh for 23/08/2018 08:00 (NSM: 28800) [Predicted Delta: +1.08 kWh, Mode: full_history] (Latency: 10.05 ms)
+  >> ACTUAL OBSERVED at (t+1) :   4.50 kWh (Load: Light_Load | PF: 59.2%)
+  >> FORECAST ERROR (Act-Pred):  -0.36 kWh | |Error|:  0.36 kWh (-7.5%)
+  >> ANOMALY STATUS          : Normal consumption within statistical MAD threshold (Z-MAD: -0.49)
+
+[INTERVAL 8/10] Current Time: 23/08/2018 08:00 (NSM: 28800) -> Target: 23/08/2018 08:15 (NSM: 29700)
+  Current State (t)           :   4.50 kWh | Load: Light_Load | PF: 59.2%
+  >> PREDICTION at time t     :  36.56 kWh for 23/08/2018 08:15 (NSM: 29700) [Predicted Delta: +32.06 kWh, Mode: full_history] (Latency: 10.18 ms)
+  >> ACTUAL OBSERVED at (t+1) :  41.00 kWh (Load: Light_Load | PF: 73.3%)
+  >> FORECAST ERROR (Act-Pred):  +4.44 kWh | |Error|:  4.44 kWh (+12.1%)
+  >> ANOMALY DETECTED        : [NEW ALERT DISPATCHED] Severity: HIGH | Type: forecast_deviation
+     Reason                  : Substantial forecast deviation: Actual consumption (41.00 kWh) is 4.44 kWh above predicted baseline (36.56 kWh; Robust Z = +5.99).
+     Operator Action         : Cross-reference shift changeover timing and review secondary auxiliary loads (rolling mill pumps, cooling towers, dust collection fans).
+
+[INTERVAL 9/10] Current Time: 23/08/2018 08:15 (NSM: 29700) -> Target: 23/08/2018 08:30 (NSM: 30600)
+  Current State (t)           :  41.00 kWh | Load: Light_Load | PF: 73.3%
+  >> PREDICTION at time t     :  64.94 kWh for 23/08/2018 08:30 (NSM: 30600) [Predicted Delta: +23.94 kWh, Mode: full_history] (Latency: 10.48 ms)
+  >> ACTUAL OBSERVED at (t+1) :  66.06 kWh (Load: Light_Load | PF: 74.4%)
+  >> FORECAST ERROR (Act-Pred):  +1.12 kWh | |Error|:  1.12 kWh (+1.7%)
+  >> ANOMALY STATUS          : Normal consumption within statistical MAD threshold (Z-MAD: +1.51)
+
+[INTERVAL 10/10] Current Time: 23/08/2018 08:30 (NSM: 30600) -> Target: 23/08/2018 08:45 (NSM: 31500)
+  Current State (t)           :  66.06 kWh | Load: Light_Load | PF: 74.4%
+  >> PREDICTION at time t     :  65.41 kWh for 23/08/2018 08:45 (NSM: 31500) [Predicted Delta: -0.65 kWh, Mode: full_history] (Latency: 10.03 ms)
+  >> ACTUAL OBSERVED at (t+1) :  59.47 kWh (Load: Light_Load | PF: 75.5%)
+  >> FORECAST ERROR (Act-Pred):  -5.94 kWh | |Error|:  5.94 kWh (-9.1%)
+  >> ANOMALY DETECTED        : [NEW ALERT DISPATCHED] Severity: CRITICAL | Type: forecast_deviation
+     Reason                  : Substantial forecast deviation: Actual consumption (59.47 kWh) is 5.94 kWh below predicted baseline (65.41 kWh; Robust Z = -8.01).
+     Operator Action         : Cross-reference shift changeover timing and review secondary auxiliary loads (rolling mill pumps, cooling towers, dust collection fans).
+
+========================================================================================
+STAGE 4: DEMONSTRATION PERFORMANCE SUMMARY
+========================================================================================
+Int  | Current (t) | Forecast  | Actual   | Error (Act-Pred)  | Latency   | Anomaly Status
+----------------------------------------------------------------------------------------
+1    |     3.17    |   3.31    |   3.17   |      -0.14 kWh    | 27.99 ms | Normal
+2    |     3.17    |   3.25    |   3.13   |      -0.12 kWh    |  9.44 ms | Normal
+3    |     3.13    |   3.16    |   3.06   |      -0.10 kWh    | 10.03 ms | Normal
+4    |     3.06    |   3.08    |   3.06   |      -0.02 kWh    | 10.29 ms | Normal
+5    |     3.06    |   3.08    |   3.24   |      +0.16 kWh    | 10.23 ms | Normal
+6    |     3.24    |   3.75    |   3.78   |      +0.03 kWh    |  9.49 ms | Normal
+7    |     3.78    |   4.86    |   4.50   |      -0.36 kWh    | 10.05 ms | Normal
+8    |     4.50    |  36.56    |  41.00   |      +4.44 kWh    | 10.18 ms | ALARM (High)
+9    |    41.00    |  64.94    |  66.06   |      +1.12 kWh    | 10.48 ms | Normal
+10   |    66.06    |  65.41    |  59.47   |      -5.94 kWh    | 10.03 ms | ALARM (Critical)
+----------------------------------------------------------------------------------------
+DEMONSTRATION SAMPLE METRICS (10 intervals / 2.5 hours):
+  Sample MAE                  : 1.2423 kWh
+  Sample RMSE                 : 2.3748 kWh
+  Sample Window Period        : 23/08/2018 06:15 to 23/08/2018 08:45
+
+INFERENCE LATENCY BREAKDOWN (time.perf_counter):
+  Cold-Start Latency (Int 1)  : 27.99 ms (initial C++ thread pool initialization)
+  Warm Steady-State (Int 2-10): 10.02 ms average (min: 9.44 ms, max: 10.48 ms)
+  Stabilized Steady (Int 6-10): 10.05 ms average
+
+ALERTS & LIFECYCLE SUMMARY:
+  Total Alerts Dispatched     : 10 alerts
+
+FULL HELD-OUT TEST BENCHMARK METRICS (5,607 intervals / 4.25 months):
+  Sequential Pipeline Test MAE: 3.6774 kWh
+  Sequential Pipeline Test RMSE: 8.0606 kWh
+  Baseline Naive Test RMSE    : 11.9448 kWh
+  Baseline Naive Test MAE     : 5.2769 kWh
+  Model vs Naive Baseline     : 32.52% RMSE error reduction (8.0606 kWh vs 11.9448 kWh)
+========================================================================================
+Output log written to: C:\Users\sriva\Downloads\inovez\SmartPlantAI_Project\DATA_DIVERGENCE_SUBMISSION\results\model_demo_output.txt
+========================================================================================

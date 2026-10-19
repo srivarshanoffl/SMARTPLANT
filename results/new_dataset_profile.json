@@ -1,0 +1,116 @@
+{
+    "dataset_name": "Industrial Asset-Level Electrical Energy Dataset from a Manufacturing Facility (15-Minute Aggregates)",
+    "source_institution": "Munster Technological University (MTU)",
+    "archive_format": "ZIP (218 MB compressed, ~43,492 partition CSV files)",
+    "stream_access_method": "Direct streaming read via IndustrialAssetDatasetAdapter (zero disk extraction)",
+    "total_assets_monitored": 43,
+    "grid_incomer_asset": {
+        "asset_id": "mi_a",
+        "asset_type": "Electrical_GridImport",
+        "is_submeter": false,
+        "phase": "ALL",
+        "total_intervals": 21162,
+        "period_start_utc": "2025-05-22 13:45:00",
+        "period_end_utc": "2025-12-31 23:45:00",
+        "sampling_interval_minutes": 15
+    },
+    "solar_generation_asset": {
+        "asset_id": "mi_b",
+        "asset_type": "Electrical_PVGeneration",
+        "is_submeter": false
+    },
+    "submetered_asset_inventory": {
+        "distribution_subboards": [
+            "sb_a",
+            "sb_b",
+            "sb_c"
+        ],
+        "manufacturing_presses": [
+            "p_a",
+            "p_b",
+            "p_c",
+            "p_d",
+            "p_e",
+            "p_f",
+            "p_g",
+            "p_h",
+            "p_i",
+            "p_j",
+            "p_k",
+            "p_l",
+            "p_m",
+            "p_n"
+        ],
+        "press_heating_and_auxiliaries": [
+            "php_c",
+            "php_j",
+            "pr_e",
+            "pr_f",
+            "pr_k"
+        ],
+        "compressed_air_systems": [
+            "comp_a",
+            "comp_b"
+        ],
+        "process_mixing": [
+            "mix_a",
+            "mix_b",
+            "mix_c",
+            "mix_d"
+        ],
+        "hvac_and_extraction": [
+            "ahu_a",
+            "ahu_b",
+            "ahu_c",
+            "ex_a",
+            "ex_b",
+            "hp_a",
+            "hp_b"
+        ],
+        "utilities_and_handling": [
+            "u_a",
+            "u_b",
+            "u_c",
+            "u_d",
+            "u_e",
+            "mh_a"
+        ]
+    },
+    "data_quality_audit": {
+        "duplicate_timestamps": 0,
+        "strictly_monotonic_timestamps": true,
+        "irregular_interval_count": 4,
+        "max_interval_gap": "2 days 00:00:00",
+        "explanation_of_gaps": "Four isolated operational gaps corresponding to facility weekend maintenance shutdowns (max 48h).",
+        "reliable_window_fraction_pct": 99.995,
+        "average_seconds_observed_per_window": 900.0,
+        "average_data_coverage_pct": 99.9987
+    },
+    "main_incomer_energy_statistics_kwh": {
+        "count": 21162,
+        "mean_kwh": 58.06,
+        "std_kwh": 29.55,
+        "min_kwh": 3.22,
+        "p25_kwh": 30.9,
+        "median_kwh": 61.94,
+        "p75_kwh": 79.23,
+        "p95_kwh": 105.54,
+        "max_kwh": 147.83
+    },
+    "feature_compatibility_with_steel_plant_model": {
+        "status": "INCOMPATIBLE_FOR_DIRECT_INFERENCE",
+        "missing_required_features": [
+            "Lagging_Current_Reactive.Power_kVarh",
+            "Leading_Current_Reactive_Power_kVarh",
+            "CO2(tCO2)",
+            "Lagging_Current_Power_Factor",
+            "Leading_Current_Power_Factor",
+            "Load_Type (Light_Load, Medium_Load, Maximum_Load)"
+        ],
+        "structural_limitations": [
+            "External facility is a discrete manufacturing plant (injection presses, mixers) whereas production model was trained on a continuous steel manufacturing plant.",
+            "Directly feeding this dataset into the 37-feature model would require fabricating missing reactive power, power factor, and CO2, which violates strict anti-fabrication guidelines.",
+            "Per prompt Section 4 instructions, evaluation of the external dataset must be conducted using native baselines and exploratory attribution, not forced invalid inferences."
+        ]
+    }
+}

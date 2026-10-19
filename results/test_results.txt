@@ -1,0 +1,68 @@
+================================================================================
+SMARTPLANT AI — UNIT TEST SUITE EXECUTION RESULTS
+Timestamp: 2026-10-19 20:13:24 UTC
+Command  : C:\Users\sriva\AppData\Local\Python\pythoncore-3.14-64\python.exe -m unittest discover -s tests -p test_*.py -v
+Exit Code: 0
+================================================================================
+
+test_alert_lifecycle (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_alert_lifecycle) ... ok
+test_anomaly_telemetry_temporal_alignment (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_anomaly_telemetry_temporal_alignment)
+Regression test for Issue 1: ... ok
+test_chronological_alignment (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_chronological_alignment) ... ok
+test_cold_start_uncalibrated_detector (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_cold_start_uncalibrated_detector) ... ok
+test_demonstration_vs_full_test_metric_distinction (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_demonstration_vs_full_test_metric_distinction)
+Regression test for Issue 5: ... ok
+test_duplicate_alert_prevention_and_cooldown (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_duplicate_alert_prevention_and_cooldown) ... ok
+test_forecast_error_sign_convention (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_forecast_error_sign_convention)
+Regression test for Issue 3: ... ok
+test_forecasting_pipeline_preservation (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_forecasting_pipeline_preservation) ... ok
+test_historical_replay_step (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_historical_replay_step) ... ok
+test_large_forecast_deviation (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_large_forecast_deviation) ... ok
+test_latency_cold_start_vs_warm_steady_state (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_latency_cold_start_vs_warm_steady_state)
+Regression test for Issue 4: ... ok
+test_missing_reading (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_missing_reading) ... ok
+test_nan_and_inf_reading (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_nan_and_inf_reading) ... ok
+test_negative_usage_reading (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_negative_usage_reading) ... ok
+test_normal_energy_consumption (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_normal_energy_consumption) ... ok
+test_sudden_consumption_drop (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_sudden_consumption_drop) ... ok
+test_sudden_consumption_spike (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_sudden_consumption_spike) ... ok
+test_threshold_calibration_without_leakage (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_threshold_calibration_without_leakage) ... ok
+test_zero_and_near_zero_predictions (test_anomaly_detection.TestAnomalyDetectionAndAlerts.test_zero_and_near_zero_predictions) ... ok
+test_business_billing_logic (test_smartplant.TestSmartPlantAI.test_business_billing_logic) ... ok
+test_carbon_estimation_factor (test_smartplant.TestSmartPlantAI.test_carbon_estimation_factor) ... ok
+test_feature_engineering_parity_all_25 (test_smartplant.TestSmartPlantAI.test_feature_engineering_parity_all_25)
+Verify inference feature engineering produces all 25 features matching formulas. ... ok
+test_hypothetical_peak_shaving_simulation (test_smartplant.TestSmartPlantAI.test_hypothetical_peak_shaving_simulation) ... ok
+test_lag_feature_generation (test_smartplant.TestSmartPlantAI.test_lag_feature_generation) ... ok
+test_machinery_control_recommendation (test_smartplant.TestSmartPlantAI.test_machinery_control_recommendation) ... ok
+test_metadata_inference_mode_distinction (test_smartplant.TestSmartPlantAI.test_metadata_inference_mode_distinction)
+Metadata must distinguish cold_start_fallback, partial_history, and full_history. ... ok
+test_midnight_target_alignment (test_smartplant.TestSmartPlantAI.test_midnight_target_alignment)
+Verify raw dataset has zero target mismatches across midnight boundaries. ... ok
+test_model_artifact_identity (test_smartplant.TestSmartPlantAI.test_model_artifact_identity)
+Verify that get_prediction_pipeline loads the breakthrough champion and preserves rollback models. ... ok
+test_model_caching_performance (test_smartplant.TestSmartPlantAI.test_model_caching_performance)
+Repeated calls to get_prediction_pipeline must return the cached in-memory instance. ... ok
+test_model_loads_without_error (test_smartplant.TestSmartPlantAI.test_model_loads_without_error)
+get_prediction_pipeline() must succeed and return a usable object. ... ok
+test_negative_history_rejected (test_smartplant.TestSmartPlantAI.test_negative_history_rejected)
+Negative or non-finite values in history must raise ValueError. ... ok
+test_negative_usage_rejected (test_smartplant.TestSmartPlantAI.test_negative_usage_rejected)
+Negative energy usage must raise an explicit ValueError. ... ok
+test_non_finite_features_rejected (test_smartplant.TestSmartPlantAI.test_non_finite_features_rejected)
+NaN or Inf sensor readings must raise an explicit ValueError. ... ok
+test_prediction_cold_start (test_smartplant.TestSmartPlantAI.test_prediction_cold_start)
+Cold-start (no history) must return a positive float. ... ok
+test_prediction_invalid_features (test_smartplant.TestSmartPlantAI.test_prediction_invalid_features) ... ok
+test_prediction_returns_float (test_smartplant.TestSmartPlantAI.test_prediction_returns_float) ... ok
+test_prediction_warm_start (test_smartplant.TestSmartPlantAI.test_prediction_warm_start)
+Warm-start with recent history must return a positive float. ... ok
+test_scada_continuous_timestamps (test_smartplant.TestSmartPlantAI.test_scada_continuous_timestamps)
+Raw dataset timestamps must form a strictly continuous 15-minute series across all rows. ... ok
+test_sequential_inference_pipeline (test_smartplant.TestSmartPlantAI.test_sequential_inference_pipeline)
+Sequential inference must iterate across records and maintain updated history. ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 4.043s
+
+OK

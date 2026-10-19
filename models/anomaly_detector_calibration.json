@@ -1,0 +1,57 @@
+{
+    "config": {
+        "mad_multiplier_low": 2.0,
+        "mad_multiplier_med": 3.0,
+        "mad_multiplier_high": 4.5,
+        "mad_multiplier_crit": 6.0,
+        "min_pred_for_pct_error": 1.0,
+        "usage_high_percentile": 99.5,
+        "usage_low_percentile": 0.5
+    },
+    "stats": {
+        "n_samples": 22424,
+        "global_residual_median": 0.0,
+        "global_residual_mad": 0.5,
+        "global_error_quantiles": {
+            "p90": 23.327000000000005,
+            "p95": 35.24399999999994,
+            "p99": 61.32390000000004,
+            "p998": 86.50853999999931
+        },
+        "global_usage_bounds": {
+            "low": 2.59,
+            "high": 131.63734999999983,
+            "median": 4.75
+        },
+        "load_type_bounds": {
+            "Light_Load": {
+                "count": 11484,
+                "usage_p05": 2.59,
+                "usage_p99": 105.95250000000001,
+                "residual_median": 0.0,
+                "residual_mad": 0.5,
+                "err_p95": 16.489999999999995,
+                "err_p99": 45.08080000000002
+            },
+            "Maximum_Load": {
+                "count": 4692,
+                "usage_p05": 4.07,
+                "usage_p99": 132.25250000000003,
+                "residual_median": -0.17999999999999972,
+                "residual_mad": 8.21,
+                "err_p95": 46.91,
+                "err_p99": 80.2527
+            },
+            "Medium_Load": {
+                "count": 6248,
+                "usage_p05": 2.81,
+                "usage_p99": 129.2771,
+                "residual_median": -0.06999999999999984,
+                "residual_mad": 2.7199999999999953,
+                "err_p95": 40.17,
+                "err_p99": 64.83709999999999
+            }
+        }
+    },
+    "is_fitted": true
+}

@@ -1,0 +1,65 @@
+{
+    "evaluation_target": "Main Incomer Grid Import (mi_a) Next 15-Minute Energy (Energy_kWh_15m)",
+    "dataset_name": "Munster Manufacturing Facility Asset Dataset",
+    "total_evaluated_samples": 21066,
+    "chronological_partitions": {
+        "train": {
+            "sample_count": 14746,
+            "fraction_pct": 70.0,
+            "start_utc": "2025-05-23 13:30:00",
+            "end_utc": "2025-10-26 18:30:00"
+        },
+        "validation": {
+            "sample_count": 3160,
+            "fraction_pct": 15.0,
+            "start_utc": "2025-10-26 18:45:00",
+            "end_utc": "2025-11-29 01:30:00"
+        },
+        "test": {
+            "sample_count": 3160,
+            "fraction_pct": 15.0,
+            "start_utc": "2025-11-29 01:45:00",
+            "end_utc": "2025-12-31 23:30:00"
+        }
+    },
+    "baselines_evaluated": {
+        "Naive_Persistence": {
+            "formula": "y_hat_{t+1} = y_t",
+            "validation_mae_kwh": 4.5053,
+            "validation_rmse_kwh": 6.2041,
+            "test_mae_kwh": 3.951,
+            "test_rmse_kwh": 5.5521,
+            "notes": "Best-performing baseline. Industrial discrete process load shows strong immediate autoregression across 15-min intervals."
+        },
+        "Rolling_1Hour_Mean": {
+            "formula": "y_hat_{t+1} = mean(y_t, y_{t-1}, y_{t-2}, y_{t-3})",
+            "validation_mae_kwh": 5.031,
+            "validation_rmse_kwh": 7.3303,
+            "test_mae_kwh": 4.4241,
+            "test_rmse_kwh": 6.7483,
+            "notes": "Lags behind abrupt machine state changes, leading to higher RMSE than persistence."
+        },
+        "Seasonal_24Hour_Lag": {
+            "formula": "y_hat_{t+1} = y_{t+1-96}",
+            "validation_mae_kwh": 19.6251,
+            "validation_rmse_kwh": 26.1254,
+            "test_mae_kwh": 21.6039,
+            "test_rmse_kwh": 32.1676,
+            "notes": "Severely degraded by non-uniform manufacturing batch schedules, shift turnarounds, and weekend shutdowns."
+        },
+        "Autoregressive_GBDT_LightGBM": {
+            "formula": "y_hat_{t+1} = f(lags 1..4, lag 96, rolling stats, hour, dayofweek)",
+            "validation_mae_kwh": 4.7745,
+            "validation_rmse_kwh": 6.7119,
+            "test_mae_kwh": 4.6828,
+            "test_rmse_kwh": 6.7022,
+            "notes": "Trained strictly on train partition. Slight regularized shrinkage relative to persistence on sudden spikes."
+        }
+    },
+    "comparative_summary": {
+        "champion_on_new_dataset": "Naive_Persistence",
+        "champion_test_rmse_kwh": 5.5521,
+        "champion_test_mae_kwh": 3.951,
+        "caveat": "Unlike the continuous steel plant dataset where the 37-feature ML ensemble improved RMSE from 11.94 kWh down to 8.06 kWh (-32.5%), this facility lacks reactive telemetry and schedule features. Without process telemetry, naive persistence represents the empirical upper bound for univariate forecasting."
+    }
+}

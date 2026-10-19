@@ -1,0 +1,205 @@
+{
+    "metadata": {
+        "execution_timestamp": "2026-10-19 20:39:06 UTC",
+        "platform": "Python 3.14.6 on Windows AMD64",
+        "working_directory": "C:\\Users\\sriva\\Downloads\\inovez\\SmartPlantAI_Project",
+        "validation_scope": "Full End-to-End System, Original Steel Plant Dataset, External Industrial Dataset"
+    },
+    "sections": {
+        "section_1_project_integrity": {
+            "artifacts_status": {
+                "energy_model_breakthrough.joblib": {
+                    "exists": true,
+                    "size_kb": 2341.0,
+                    "description": "Active Production Champion (55% XGB + 45% LGB Delta Ensemble)"
+                },
+                "energy_model_ensemble.joblib": {
+                    "exists": true,
+                    "size_kb": 180537.9,
+                    "description": "Rollback Champion 1 (Direct Weighted Ensemble LGB+XGB+RF)"
+                },
+                "energy_model_optimized.joblib": {
+                    "exists": true,
+                    "size_kb": 175485.5,
+                    "description": "Rollback Champion 2 (Tuned Random Forest with Engineered Features)"
+                },
+                "energy_model_improved.joblib": {
+                    "exists": true,
+                    "size_kb": 2188.7,
+                    "description": "Rollback Champion 3 (Direct Gradient Boosting)"
+                },
+                "energy_model.joblib": {
+                    "exists": true,
+                    "size_kb": 37377.3,
+                    "description": "Rollback Champion 4 (Original Baseline Random Forest)"
+                },
+                "anomaly_detector_calibration.json": {
+                    "exists": true,
+                    "size_kb": 1.8,
+                    "description": "Calibrated Anomaly Detection Thresholds (Median, MAD, Quantiles)"
+                }
+            },
+            "import_tests": {
+                "predict_pipeline": {
+                    "status": "PASS",
+                    "tag": "breakthrough",
+                    "features_engineered": true
+                },
+                "anomaly_detector": {
+                    "status": "PASS",
+                    "fitted": true
+                }
+            }
+        },
+        "section_2_steel_plant_dataset": {
+            "dataset_path": "C:\\Users\\sriva\\Downloads\\inovez\\SmartPlantAI_Project\\data\\train.csv",
+            "total_observations": 28031,
+            "data_quality": {
+                "missing_values": 0,
+                "duplicate_timestamps": 0,
+                "strictly_monotonic": true,
+                "sampling_regularity": "Strictly continuous 15-minute series",
+                "target_alignment_errors": 0
+            },
+            "chronological_partitions": {
+                "train": {
+                    "samples": 22424,
+                    "start": "01/01/2018 00:15",
+                    "end": "22/08/2018 14:00"
+                },
+                "sub_validation": {
+                    "samples": 4485,
+                    "start": "06/07/2018 21:00",
+                    "end": "22/08/2018 14:00"
+                },
+                "test": {
+                    "samples": 5607,
+                    "start": "22/08/2018 14:15",
+                    "end": "19/10/2018 23:45"
+                }
+            },
+            "metrics": {
+                "test_persistence": {
+                    "mae_kwh": 5.2769,
+                    "rmse_kwh": 11.9448
+                },
+                "test_champion_model": {
+                    "mae_kwh": 3.6774,
+                    "rmse_kwh": 8.0606
+                },
+                "subval_persistence": {
+                    "mae_kwh": 6.0631,
+                    "rmse_kwh": 13.5851
+                },
+                "subval_champion_model": {
+                    "mae_kwh": 2.8214,
+                    "rmse_kwh": 5.8566
+                },
+                "rmse_reduction_vs_naive_pct": 32.52
+            }
+        },
+        "section_3_external_dataset": {
+            "dataset_name": "Munster Manufacturing Facility Asset Dataset",
+            "archive_path": "C:\\Users\\sriva\\Downloads\\Industrial Asset-Level Electrical Energy Dataset from a Manufacturing Facility (15-Minute Aggregates).zip",
+            "monitored_assets": 43,
+            "incomer_asset": "mi_a (Electrical_GridImport)",
+            "evaluated_samples": 21066,
+            "partitions": {
+                "train": {
+                    "samples": 14746,
+                    "start": "2025-05-23 13:30:00",
+                    "end": "2025-10-26 18:30:00"
+                },
+                "validation": {
+                    "samples": 3160,
+                    "start": "2025-10-26 18:45:00",
+                    "end": "2025-11-29 01:30:00"
+                },
+                "test": {
+                    "samples": 3160,
+                    "start": "2025-11-29 01:45:00",
+                    "end": "2025-12-31 23:30:00"
+                }
+            },
+            "baseline_metrics": {
+                "persistence_validation": {
+                    "mae_kwh": 4.5053,
+                    "rmse_kwh": 6.2041
+                },
+                "persistence_test": {
+                    "mae_kwh": 3.951,
+                    "rmse_kwh": 5.5521
+                },
+                "rolling_mean_test": {
+                    "mae_kwh": 4.4241,
+                    "rmse_kwh": 6.7483
+                },
+                "seasonal_lag_test": {
+                    "mae_kwh": 21.6039,
+                    "rmse_kwh": 32.1676
+                }
+            },
+            "feature_compatibility": "INCOMPATIBLE_WITH_STEEL_PLANT_MODEL (Missing 5 electrical features)"
+        },
+        "section_4_edge_cases": {
+            "missing_fields": {
+                "status": "PASS",
+                "notes": "Correctly rejected missing fields: Missing required input features: ['Lagging_Current_Reactive.Power_kVarh', 'Leading_Current_Reactive_Power_kVarh', 'CO2(tCO2)', 'Lagging_Current_Power_Factor', 'Leading_Current_Power_Factor', 'NSM', 'Load_Type', 'WeekStatus', 'Day_of_week']"
+            },
+            "negative_usage": {
+                "status": "PASS",
+                "notes": "Correctly raised ValueError: Usage_kWh must be non-negative and finite; got -15.0."
+            },
+            "cold_start_empty_history": {
+                "status": "PASS",
+                "mode": "cold_start_fallback",
+                "prediction": 47.55
+            },
+            "nan_telemetry_check": {
+                "status": "PASS",
+                "severity": "Critical",
+                "type": "data_quality"
+            },
+            "alert_lifecycle_and_deduplication": {
+                "status": "PASS",
+                "suppression_verified": true,
+                "acknowledgement_verified": true,
+                "resolution_verified": true
+            }
+        },
+        "section_5_execution_status": {
+            "demonstration": {
+                "command": "C:\\Users\\sriva\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe run_demo.py",
+                "exit_code": 0,
+                "status": "PASS",
+                "duration_seconds": 5.47
+            },
+            "test_suite": {
+                "command": "C:\\Users\\sriva\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe -m unittest discover -s tests -p test_*.py -v",
+                "exit_code": 0,
+                "status": "PASS",
+                "total_tests_run": 39,
+                "failures": 0,
+                "errors": 0,
+                "duration_seconds": 6.83
+            }
+        },
+        "section_6_latency_benchmarks": {
+            "cold_start_ms": 22.04,
+            "warm_mean_ms": 10.23,
+            "warm_median_ms": 9.94,
+            "warm_p95_ms": 11.55,
+            "warm_range_ms": "9.26 - 13.20 ms",
+            "measurement_method": "High-resolution hardware performance counter (time.perf_counter) wrapped strictly around predict_next_interval()"
+        }
+    },
+    "final_verdict": {
+        "verdict": "PASS WITH LIMITATIONS",
+        "justification": "All 39 unit and regression tests passed, model achieves 8.0606 kWh RMSE (-32.52% vs persistence), temporal telemetry alignment verified, edge case battery passed with zero errors.",
+        "operational_limitations": [
+            "Absence of ground-truth maintenance logs requires statistical rather than supervised anomaly classification.",
+            "External manufacturing dataset lacks reactive power telemetry and cannot be force-fed into steel plant model.",
+            "Unannounced operational shift jumps represent irreducible entropy in passive SCADA telemetry without MES schedules."
+        ]
+    }
+}
